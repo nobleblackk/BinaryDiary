@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const passport = require("passport");
 
 const bodyParser = require("body-parser");
 
@@ -27,6 +28,12 @@ mongoose
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
+
+// Passport middleware
+app.use(passport.initialize());
+
+// Passport Config
+require("./config/passport")(passport);
 
 // app.get("/api/users/test", (req, res) => {
 //   res.send("Hello user");
