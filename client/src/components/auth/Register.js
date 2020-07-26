@@ -1,10 +1,16 @@
 import React, { Component } from "react";
 
-// Axios => A HTTP Client, We gonna make our request in the onSubmit
-import axios from "axios";
+// To include our Prop-Types. Its a react thing. Any property you have in your component, you should map to Prop-Types and also we can set them to data type, also if they required or not
+import PropTypes from "prop-types";
 
 // Importing classnames so that we can enable conditional statements, whether to add the specific className to any element or not.
 import classnames from "classnames";
+
+// for connecting redux to component and also can get state data from connect
+import { connect } from "react-redux";
+
+// Importing our Action Creator
+import { registerUser } from "../../actions/authActions";
 
 class Register extends Component {
   constructor() {
@@ -36,19 +42,20 @@ class Register extends Component {
       password2: this.state.password2,
     };
 
-    // We are not using the whole url here(http://localhost:5000), because we already put that in proxy value in package.json, so now we need not mention the whole url address. :)
-    axios
-      .post("/api/users/register", newUser)
-      .then((res) => console.log(res.data))
-      .catch((err) => this.setState({ errors: err.response.data }));
+    // Any Action that we bring in, we call it through this.props.ActionCreatorName
+    this.props.registerUser(newUser);
 
     // console.log(newUser);
   }
 
   render() {
     const { errors } = this.state;
+
+    const { user } = this.props.auth;
+
     return (
       <div className="register">
+        {user ? user.name : null}
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
@@ -138,4 +145,19 @@ class Register extends Component {
   }
 }
 
-export default Register;
+// setting propTypes to our Component
+// mapping our Action Creator and auth state to propTypes
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
+
+// This is to get our state.
+// Here firstly we are sending only one reducer state, which is auth and then it can be accessed using "this.props.auth"
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+  };
+};
+
+export default connect(mapStateToProps, { registerUser })(Register);
