@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from "redux";
 
-// redux-thunk as middleware.this middleware will help us, whenever we make any ajax request, then it will wait after receiving the response, it will dispatch
+// redux-thunk as middleware.this middleware will help us, whenever we make any ajax request, then it will wait, then after receiving the response, it will dispatch.
 import thunk from "redux-thunk";
 
 // as our rootReducer is named as index.js, so we need not to specify that, it will import from the repository reducers index.js only, when no name mentioned. Just a Clever Way for less coding :P.

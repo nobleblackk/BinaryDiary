@@ -1,9 +1,17 @@
 import React, { Component } from "react";
 
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
 // Import Link to use in place of "anchor tag", to redirect pages(internal routes)
 import { Link } from "react-router-dom";
+class Landing extends Component {
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
+  }
 
-export default class Landing extends Component {
   render() {
     return (
       <div className="landing">
@@ -32,3 +40,15 @@ export default class Landing extends Component {
     );
   }
 }
+
+Landing.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStatesToProp = (state) => {
+  return {
+    auth: state.auth,
+  };
+};
+
+export default connect(mapStatesToProp, {})(Landing);

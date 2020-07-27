@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 
+// this.props.histroy is gonna allow us to use this.props.history to redirect within the Action, we could easily do this task, if we were in the component, but for action we need to take this step and take withRouter
+import { withRouter } from "react-router-dom";
+
 // To include our Prop-Types. Its a react thing. Any property you have in your component, you should map to Prop-Types and also we can set them to data type, also if they required or not
 import PropTypes from "prop-types";
 
@@ -31,6 +34,19 @@ class Register extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  // This runs when component receives new props
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
+  }
+
   onSubmit(e) {
     //   It will prevent to reloading after Form-Submission
     e.preventDefault();
@@ -43,7 +59,8 @@ class Register extends Component {
     };
 
     // Any Action that we bring in, we call it through this.props.ActionCreatorName
-    this.props.registerUser(newUser);
+    // this.props.histroy is gonna allow us to use this.props.history to redirect within the Action, we could easily do this task, if we were in the component, but for action we need to take this step and take withRouter
+    this.props.registerUser(newUser, this.props.history);
 
     // console.log(newUser);
   }
@@ -51,11 +68,12 @@ class Register extends Component {
   render() {
     const { errors } = this.state;
 
-    const { user } = this.props.auth;
+    // Just for testing
+    // const { user } = this.props.auth;
 
     return (
       <div className="register">
-        {user ? user.name : null}
+        {/* {user ? user.name : null} */}
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
@@ -150,6 +168,7 @@ class Register extends Component {
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
 };
 
 // This is to get our state.
@@ -157,7 +176,8 @@ Register.propTypes = {
 const mapStateToProps = (state) => {
   return {
     auth: state.auth,
+    errors: state.errors,
   };
 };
 
-export default connect(mapStateToProps, { registerUser })(Register);
+export default connect(mapStateToProps, { registerUser })(withRouter(Register));
