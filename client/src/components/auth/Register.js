@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 
+// Importing Component for Form HTML
+import TextFieldGroup from "../common/TextFieldGroup";
+
 // this.props.histroy is gonna allow us to use this.props.history to redirect within the Action, we could easily do this task, if we were in the component, but for action we need to take this step and take withRouter
 import { withRouter } from "react-router-dom";
 
@@ -82,7 +85,16 @@ class Register extends Component {
                 Create your DevConnector account
               </p>
               <form noValidate onSubmit={this.onSubmit.bind(this)}>
-                <div className="form-group">
+                <TextFieldGroup
+                  placeholder="Name"
+                  name="name"
+                  value={this.state.name}
+                  onChange={this.onChange}
+                  error={errors.name}
+                ></TextFieldGroup>
+
+                {/* Commenting all this so that we can replace this by our JSX Component which is just above side */}
+                {/* <div className="form-group">
                   <input
                     type="text"
                     className={classnames("form-control form-control-lg", {
@@ -91,18 +103,30 @@ class Register extends Component {
                     placeholder="Name"
                     name="name"
                     value={this.state.name}
-                    onChange={this.onChange}
+                    onChange={this.onChange} */}
 
-                    // We need not required(HTML5), We have our own  Error-Checking,
+                {/* // We need not required(HTML5), We have our own  Error-Checking,
                     // required
                   />
 
                   {/* Setting Up condtional statement for the situation, when we need to print any error coming from backend side */}
-                  {errors.name && (
+                {/* {errors.name && (
                     <div className="invalid-feedback">{errors.name}</div>
                   )}
-                </div>
-                <div className="form-group">
+                </div> */}
+                {/* Another Component for Email */}
+
+                <TextFieldGroup
+                  placeholder="Email"
+                  name="email"
+                  value={this.state.email}
+                  type="email"
+                  onChange={this.onChange}
+                  error={errors.email}
+                  info="This site uses Gravatar so if you want a profile image, use a Gravatar email"
+                ></TextFieldGroup>
+
+                {/* <div className="form-group">
                   <input
                     type="email"
                     className={classnames("form-control form-control-lg", {
@@ -122,8 +146,20 @@ class Register extends Component {
                     This site uses Gravatar so if you want a profile image, use
                     a Gravatar email
                   </small>
-                </div>
-                <div className="form-group">
+                </div> */}
+
+                {/* Another Component for Password */}
+
+                <TextFieldGroup
+                  placeholder="Password"
+                  name="password"
+                  value={this.state.password}
+                  type="password"
+                  onChange={this.onChange}
+                  error={errors.password}
+                ></TextFieldGroup>
+
+                {/* <div className="form-group">
                   <input
                     type="password"
                     className={classnames("form-control form-control-lg", {
@@ -137,8 +173,19 @@ class Register extends Component {
                   {errors.password && (
                     <div className="invalid-feedback">{errors.password}</div>
                   )}
-                </div>
-                <div className="form-group">
+                </div> */}
+                {/* Another Component for Confirming Password */}
+
+                <TextFieldGroup
+                  placeholder="COnfirm Password"
+                  name="password2"
+                  value={this.state.password2}
+                  type="password"
+                  onChange={this.onChange}
+                  error={errors.password2}
+                ></TextFieldGroup>
+
+                {/* <div className="form-group">
                   <input
                     type="password"
                     className={classnames("form-control form-control-lg", {
@@ -152,7 +199,7 @@ class Register extends Component {
                   {errors.password2 && (
                     <div className="invalid-feedback">{errors.password2}</div>
                   )}
-                </div>
+                </div> */}
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
             </div>

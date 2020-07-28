@@ -1,7 +1,8 @@
 import React from "react";
 
 // Importing to create Route services for Frontend React part and also BrowserRouter to mimic as a standard server to get back and forth button
-import { BrowserRouter as Router, Route } from "react-router-dom";
+// Every PrivateRoute must be wrapped in Switch, thats gonnae prevent some starange redirection issues
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // Decodes jwt to token
 import jwt_decode from "jwt-decode";
@@ -12,6 +13,11 @@ import setAuthToken from "./utils/setAuthToken";
 // It returns a plain Action Object
 import { setCurrentUser } from "./actions/authActions";
 
+// import { clearCurrentProfile } from "./actions/profileActions";
+
+// Bringing our Dashboard
+import Dashboard from "./components/dashboard/Dashboard";
+
 import { logoutUser } from "./actions/authActions";
 
 // It is a react component, it provides our application with the store which holds the state, which holds all our data. It has to wrapped around every thing. It works like a reference to our Redux Store.
@@ -19,6 +25,9 @@ import { Provider } from "react-redux";
 
 // Importing store
 import store from "./store";
+
+// Importing Private Route
+import PrivateRoute from "./components/common/PrivateRoute";
 
 // Navbar
 import Navbar from "./components/layout/Navbar";
@@ -35,6 +44,7 @@ import Login from "./components/auth/Login";
 
 // webpack helps to access the styling part
 import "./App.css";
+import { clearCurrentProfile } from "./actions/profileActions";
 
 // check for token
 if (localStorage.jwtToken) {
@@ -52,6 +62,9 @@ if (localStorage.jwtToken) {
   const currentTime = Date.now() / 1000;
   if (decoded.exp < currentTime) {
     store.dispatch(logoutUser());
+
+    // after seesion expire, clear the current user profile
+    store.dispatch(clearCurrentProfile());
 
     // Redirect to login
     window.location.href = "/login";
@@ -73,6 +86,13 @@ class App extends React.Component {
               <Route exact path="/register" component={Register}></Route>
 
               <Route exact path="/login" component={Login}></Route>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/dashboard"
+                  component={Dashboard}
+                ></PrivateRoute>
+              </Switch>
             </div>
             <Footer />
           </div>
