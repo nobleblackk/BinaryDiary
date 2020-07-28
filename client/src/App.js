@@ -37,6 +37,7 @@ import Footer from "./components/layout/Footer";
 
 // Landing Page
 import Landing from "./components/layout/Landing";
+import CreateProfile from "./components/create-profile/CreateProfile";
 
 // Importing Login and Register Components to use in their specific Routes
 import Register from "./components/auth/Register";
@@ -86,6 +87,13 @@ class App extends React.Component {
               <Route exact path="/register" component={Register}></Route>
 
               <Route exact path="/login" component={Login}></Route>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/create-profile"
+                  component={CreateProfile}
+                ></PrivateRoute>
+              </Switch>
               <Switch>
                 <PrivateRoute
                   exact
