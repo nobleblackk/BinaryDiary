@@ -46,6 +46,10 @@ import Login from "./components/auth/Login";
 // webpack helps to access the styling part
 import "./App.css";
 import { clearCurrentProfile } from "./actions/profileActions";
+import EditProfile from "./components/edit-profile/EditProfile";
+
+import AddExperience from "./components/add-credentials/AddExperience";
+import AddEducation from "./components/add-credentials/AddEducation";
 
 // check for token
 if (localStorage.jwtToken) {
@@ -99,6 +103,27 @@ class App extends React.Component {
                   exact
                   path="/dashboard"
                   component={Dashboard}
+                ></PrivateRoute>
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/edit-profile"
+                  component={EditProfile}
+                ></PrivateRoute>
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/add-experience"
+                  component={AddExperience}
+                ></PrivateRoute>
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/add-education"
+                  component={AddEducation}
                 ></PrivateRoute>
               </Switch>
             </div>
