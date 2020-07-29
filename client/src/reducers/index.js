@@ -10,8 +10,12 @@ import profileReducer from "./profileReducer";
 // For Error Purpose
 import errorReducer from "./errorReducer";
 
+// For Post Purpose
+import postReducer from "./postReducer";
+
 export default combineReducers({
   auth: authReducer,
   errors: errorReducer,
   profile: profileReducer,
+  post: postReducer,
 });

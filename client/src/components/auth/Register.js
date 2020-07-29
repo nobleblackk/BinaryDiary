@@ -81,9 +81,7 @@ class Register extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Sign Up</h1>
-              <p className="lead text-center">
-                Create your DevConnector account
-              </p>
+              <p className="lead text-center">Create your BinaryDiary</p>
               <form noValidate onSubmit={this.onSubmit.bind(this)}>
                 <TextFieldGroup
                   placeholder="Name"
@@ -177,7 +175,7 @@ class Register extends Component {
                 {/* Another Component for Confirming Password */}
 
                 <TextFieldGroup
-                  placeholder="COnfirm Password"
+                  placeholder="Confirm Password"
                   name="password2"
                   value={this.state.password2}
                   type="password"
