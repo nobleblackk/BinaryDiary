@@ -30,9 +30,9 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch((error) => console.log(error));
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
+// app.get("/", (req, res) => {
+//   res.send("Hello World");
+// });
 
 // Passport middleware
 app.use(passport.initialize());

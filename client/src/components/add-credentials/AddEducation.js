@@ -4,7 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 
 import TextFieldGroup from "../common/TextFieldGroup";
 
-import { TextAreaFieldGroup } from "../common/TextAreaFieldGroup";
+// import { TextAreaFieldGroup } from "../common/TextAreaFieldGroup";
 
 import { connect } from "react-redux";
 
@@ -158,7 +158,6 @@ class AddEducation extends Component {
                   value="Submit"
                   className="btn btn-info btn-block mt-4"
                   type="submit"
-                  value="Submit"
                 />
               </form>
             </div>

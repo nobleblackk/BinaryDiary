@@ -9,13 +9,13 @@ import PropTypes from "prop-types";
 
 // Importing JSX Component for using form
 import TextFieldGroup from "../common/TextFieldGroup";
-import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
+// import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import InputGroup from "../common/InputGroup";
 import SelectListGroup from "../common/SelectListGroup";
 
 import { createProfile, getCurrentProfile } from "../../actions/profileActions";
 
-import IsEmpty from "../../validation/is-empty";
+// import IsEmpty from "../../validation/is-empty";
 import isEmpty from "../../validation/is-empty";
 
 class CreateProfile extends Component {

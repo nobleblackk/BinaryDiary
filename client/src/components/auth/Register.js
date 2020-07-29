@@ -10,7 +10,7 @@ import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 
 // Importing classnames so that we can enable conditional statements, whether to add the specific className to any element or not.
-import classnames from "classnames";
+// import classnames from "classnames";
 
 // for connecting redux to component and also can get state data from connect
 import { connect } from "react-redux";
