@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 
 import { withRouter } from "react-router-dom";
 
+import { Link } from "react-router-dom";
+
 import PropTypes from "prop-types";
 
 // Importing JSX Component for using form
@@ -101,6 +103,7 @@ class CreateProfile extends Component {
         facebook: profile.facebook,
         linkedin: profile.linkedin,
         youtube: profile.youtube,
+        instagram: profile.instagram,
       });
     }
   }
@@ -230,6 +233,10 @@ class CreateProfile extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
+              <Link to="/dashboard" className="btn btn-light">
+                Go Back
+              </Link>
+
               <h1 className="display-4 text-center">Edit Profile</h1>
 
               <small className="d-block pb-3">* = required fields</small>

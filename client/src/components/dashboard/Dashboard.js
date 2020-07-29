@@ -12,6 +12,12 @@ import { connect } from "react-redux";
 // Profile Actions
 import ProfileActions from "./ProfileActions";
 
+// Importing Experience to display in dashboard
+import Experience from "./Experience";
+
+// Importing Education to display in dashboard
+import Education from "./Education";
+
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getCurrentProfile();
@@ -39,6 +45,9 @@ class Dashboard extends Component {
             </p>
             <ProfileActions></ProfileActions>
             {/* TODO: exp and edu */}
+            <Experience experience={profile.experience}></Experience>
+            <Education education={profile.education}></Education>
+
             <div style={{ marginBottom: "60px" }}>
               <button
                 onClick={this.onDeleteClick.bind(this)}
