@@ -1,5 +1,7 @@
 import { createStore, applyMiddleware, compose } from "redux";
 
+import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
+
 // redux-thunk as middleware.this middleware will help us, whenever we make any ajax request, then it will wait, then after receiving the response, it will dispatch.
 import thunk from "redux-thunk";
 
@@ -15,10 +17,8 @@ const middleware = [thunk];
 const store = createStore(
   rootReducer,
   initialState,
-  compose(
-    applyMiddleware(...middleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
+
+  applyMiddleware(...middleware)
 );
 
 export default store;
