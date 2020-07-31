@@ -222,7 +222,7 @@ class CreateProfile extends Component {
                 ></TextFieldGroup>
 
                 <TextFieldGroup
-                  placeholder="Skills"
+                  placeholder="* Skills"
                   name="skills"
                   value={this.state.skills}
                   onChange={this.onChange}

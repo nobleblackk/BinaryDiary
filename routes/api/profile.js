@@ -1,5 +1,7 @@
 const express = require("express");
 
+const { sendCancelationEmail } = require("../../emails/account");
+
 const router = express.Router();
 
 const mongoose = require("mongoose");
@@ -162,7 +164,7 @@ router.post(
         // Check if handle exists
         Profile.findOne({ handle: profileFields.handle }).then((profile) => {
           if (profile) {
-            erros.handle = "That handle already exists";
+            errors.handle = "That handle already exists";
           }
 
           // Save Profile
@@ -302,6 +304,8 @@ router.delete(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    sendCancelationEmail(req.user.email, req.user.name);
+
     Profile.findOneAndRemove({ user: req.user.id }).then(() => {
       // Now we gonna delete the user as well, while deleting his/her profile
       User.findOneAndRemove({ _id: req.user.id }).then(() => {

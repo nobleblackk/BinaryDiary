@@ -1,5 +1,10 @@
 const express = require("express");
 
+const {
+  sendWelcomeEmail,
+  sendCancelationEmail,
+} = require("../../emails/account");
+
 const router = express.Router();
 
 const gravatar = require("gravatar");
@@ -60,6 +65,7 @@ router.post("/register", (req, res) => {
             .save()
             .then((user) => res.json(user))
             .catch((error) => console.log(error));
+          sendWelcomeEmail(newUser.email, newUser.name);
         });
       });
     }
