@@ -29,7 +29,7 @@ const sendCancelationEmail = (email, name) => {
     to: email,
     from: "abhisheksharma0313@gmail.com",
     subject: "Sorry to see you go!",
-    text: `Goodbye, Buddy. I hope to see you back sometime soon.`,
+    text: `Goodbye, ${name}. I hope to see you back sometime soon.`,
   });
 };
 

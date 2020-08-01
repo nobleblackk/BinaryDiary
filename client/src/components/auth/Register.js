@@ -82,7 +82,11 @@ class Register extends Component {
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Sign Up</h1>
               <p className="lead text-center">Create your BinaryDiary</p>
-              <form noValidate onSubmit={this.onSubmit.bind(this)}>
+              <form
+                style={{ height: "100vh" }}
+                noValidate
+                onSubmit={this.onSubmit.bind(this)}
+              >
                 <TextFieldGroup
                   placeholder="Name"
                   name="name"

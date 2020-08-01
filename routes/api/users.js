@@ -35,12 +35,14 @@ router.get("/test", (req, res) => {
 // @desc Register user
 // @access Public
 router.post("/register", (req, res) => {
+  // first layer of Validation
   const { errors, isValid } = validateRegisterInput(req.body);
 
   if (!isValid) {
     return res.status(400).json(errors);
   }
 
+  // 2nd Layer of Validation
   User.findOne({ email: req.body.email }).then((user) => {
     if (user) {
       return res.status(400).json({ email: "Email already exists" });
@@ -57,6 +59,7 @@ router.post("/register", (req, res) => {
         password: req.body.password,
       });
 
+      // Encrypting the password, for that generating salt
       bcrypt.genSalt(10, (error, salt) => {
         bcrypt.hash(newUser.password, salt, (error, hash) => {
           if (error) throw error;
@@ -98,6 +101,7 @@ router.post("/login", (req, res) => {
       if (isMatch) {
         // User Matched
 
+        // When we create JWT Token, then we also send some useful data to be sent with   that token, here payload is the same useful information about User, that we are sending
         // Create JWT Payload
         const payload = {
           id: user.id,
